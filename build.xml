@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<project  default="build" basedir=".">
+<project  default="all" basedir=".">
 
  <target name="build">
         <delete dir="build"/>
@@ -18,8 +18,8 @@
 
 <target name="checkstyle">
 
-<taskdef resource="com/puppycrawl/tools/checkstyle/ant/checkstyle-ant-task.properties" classpath="/path/to/checkstyle-6.17-all.jar"/>
-<checkstyle config="sun_checks.xml">
+<taskdef resource="com/puppycrawl/tools/checkstyle/ant/checkstyle-ant-task.properties" classpath="lib/checkstyle-6.17-all.jar"/>
+<checkstyle config="lib/sun_checks.xml">
   <fileset dir="src" includes="**/*.java"/>
   <formatter type="plain"/>
   <formatter type="xml" toFile="build/checkstyle_errors.xml"/>
@@ -28,6 +28,8 @@
 </checkstyle><echo>Checkstyle done without error</echo>
 
 </target>
+
+<target name="all" depends="build, checkstyle"/>
 
 
 </project>
