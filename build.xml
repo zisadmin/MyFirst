@@ -1,11 +1,11 @@
-<project>
+<?xml version="1.0" encoding="utf-8" ?>
+<project  default="build" basedir=".">
 
-    
+ <target name="build">
+        <delete dir="build"/>
 
-    
         <mkdir dir="build/classes"/>
-        <javac srcdir="src" destdir="build/classes"/>
-  
+        <javac srcdir="src" destdir="build/classes"/>  
 
 
         <mkdir dir="build/jar"/>
@@ -14,6 +14,20 @@
                 <attribute name="Main-Class" value="Towers"/>
             </manifest>
         </jar>
-    
+</target>
+
+<target name="checkstyle">
+
+<taskdef resource="com/puppycrawl/tools/checkstyle/ant/checkstyle-ant-task.properties" classpath="/path/to/checkstyle-6.17-all.jar"/>
+<checkstyle config="sun_checks.xml">
+  <fileset dir="src" includes="**/*.java"/>
+  <formatter type="plain"/>
+  <formatter type="xml" toFile="build/checkstyle_errors.xml"/>
+  <!-- Location of cache-file. Something that is project specific -->
+  <property key="checkstyle.cache.file" file="target/cachefile"/>
+</checkstyle><echo>Checkstyle done without error</echo>
+
+</target>
+
 
 </project>
