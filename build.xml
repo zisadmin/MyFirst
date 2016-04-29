@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<project  default="all" basedir=".">
+<project name="MyProject" default="all" basedir=".">
 
  <target name="build">
+      <record name="logs/buildlog.txt" action="start"/>
         <delete dir="build"/>
 
         <mkdir dir="build/classes"/>
@@ -14,22 +15,31 @@
                 <attribute name="Main-Class" value="Towers"/>
             </manifest>
         </jar>
+       <record name="logs/buildlog.txt" action="stop"/>
+
 </target>
 
 <target name="checkstyle">
+	<record name="logs/checklog.txt" action="start"/>
 
-<taskdef resource="com/puppycrawl/tools/checkstyle/ant/checkstyle-ant-task.properties" classpath="lib/checkstyle-6.17-all.jar"/>
-<checkstyle config="lib/sun_checks.xml">
-  <fileset dir="src" includes="**/*.java"/>
-  <formatter type="plain"/>
-  <formatter type="xml" toFile="build/checkstyle_errors.xml"/>
-  <!-- Location of cache-file. Something that is project specific -->
-  <property key="checkstyle.cache.file" file="target/cachefile"/>
-</checkstyle><echo>Checkstyle done without error</echo>
+	<taskdef resource="com/puppycrawl/tools/checkstyle/ant/checkstyle-ant-task.properties" classpath="lib/checkstyle-6.17-all.jar"/>
+		<checkstyle config="lib/checks.xml">
+ 			 <fileset dir="src" includes="**/*.java"/>
+ 			 <formatter type="plain"/>
+ 			 <formatter type="xml" toFile="logs/checkstyle_errors.xml"/>  
+  			 <property key="checkstyle.cache.file" file="target/cachefile"/>
+
+		</checkstyle><echo>Checkstyle done without error</echo>
+
+	 <record name="logs/checklog.txt" action="stop"/>
+
 
 </target>
 
 <target name="all" depends="build, checkstyle"/>
+
+<target name="report" description="" depends="all">
+</target>
 
 
 </project>
