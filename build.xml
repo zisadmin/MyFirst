@@ -2,10 +2,14 @@
 <project name="MyProject" default="all" basedir=".">
 
  <target name="build">
+       <mkdir dir="build/classes"/>
+       <mkdir dir="build/jar"/>
+       <mkdir dir="logs"/>
+
+
       <record name="logs/buildlog.txt" action="start"/>
        
-        <mkdir dir="build/classes"/>
-        <javac srcdir="src" destdir="build/classes"/>  
+                <javac srcdir="src" destdir="build/classes"/>  
 
 
         <mkdir dir="build/jar"/>
