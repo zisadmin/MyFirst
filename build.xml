@@ -3,8 +3,7 @@
 
  <target name="build">
       <record name="logs/buildlog.txt" action="start"/>
-        <delete dir="build"/>
-
+       
         <mkdir dir="build/classes"/>
         <javac srcdir="src" destdir="build/classes"/>  
 
