@@ -41,8 +41,11 @@
 
 </target>
 
+
 <target name="all" depends="build, checkstyle"/>
 
-
+<target name="run">
+        <java jar="build/jar/Towers.jar" fork="true"/>
+    </target>
 
 </project>
