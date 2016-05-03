@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <project name="MyProject" default="all" basedir=".">
 
- <target name="build">
-       <mkdir dir="build/classes"/>
-       <mkdir dir="build/jar"/>
-       <mkdir dir="logs"/>
+<target name ="init">
+	<mkdir dir="build/classes"/>
+        <mkdir dir="build/jar"/>
+        <mkdir dir="logs"/>
 
+
+
+</target>
+
+<target name="build" depends="init">       
 
       <record name="logs/buildlog.txt" action="start"/>
        
@@ -22,10 +27,10 @@
 
 </target>
 
-<target name="checkstyle">
-	<record name="logs/checklog.txt" action="start"/>
+<target name="checkstyle">	
 
 	<taskdef resource="com/puppycrawl/tools/checkstyle/ant/checkstyle-ant-task.properties" classpath="lib/checkstyle-6.17-all.jar"/>
+		
 		<checkstyle config="lib/checks.xml">
  			 <fileset dir="src" includes="**/*.java"/>
  			 <formatter type="plain"/>
@@ -34,15 +39,10 @@
 
 		</checkstyle><echo>Checkstyle done without error</echo>
 
-	 <record name="logs/checklog.txt" action="stop"/>
-
-
 </target>
 
 <target name="all" depends="build, checkstyle"/>
 
-<target name="report" description="" depends="all">
-</target>
 
 
 </project>
