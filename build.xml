@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<project name="MyProject" default="all" basedir=".">
+<project name="MyProject" default="all" >
 
 <target name ="init">
 	<mkdir dir="build/classes"/>
@@ -46,6 +46,6 @@
 
 <target name="run">
         <java jar="build/jar/Towers.jar" fork="true"/>
-    </target>
+</target>
 
 </project>
