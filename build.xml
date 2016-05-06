@@ -2,50 +2,40 @@
 <project name="MyProject" default="all" >
 
 <target name ="init">
-	<mkdir dir="build/classes"/>
+        <delete dir="build/"/>
+        <delete dir="logs"/>
+        <mkdir dir="build/classes"/>
         <mkdir dir="build/jar"/>
         <mkdir dir="logs"/>
-
-
-
 </target>
 
 <target name="build" depends="init">       
 
       <record name="logs/buildlog.txt" action="start"/>
        
-                <javac srcdir="src" destdir="build/classes"/>  
-
+                <javac srcdir="src" destdir="build/classes" includeantruntime="false"/>  
 
         <mkdir dir="build/jar"/>
-        <jar destfile="build/jar/Towers.jar" basedir="build/classes">
-            <manifest>
-                <attribute name="Main-Class" value="Towers"/>
-            </manifest>
+        <jar destfile="build/jar/Project.jar" basedir="build/classes">
+            
         </jar>
        <record name="logs/buildlog.txt" action="stop"/>
-
 </target>
 
 <target name="checkstyle">	
 
-	<taskdef resource="com/puppycrawl/tools/checkstyle/ant/checkstyle-ant-task.properties" classpath="lib/checkstyle-6.17-all.jar"/>
-		
-		<checkstyle config="lib/checks.xml">
- 			 <fileset dir="src" includes="**/*.java"/>
- 			 <formatter type="plain"/>
- 			 <formatter type="xml" toFile="logs/checkstyle_errors.xml"/>  
-  			 <property key="checkstyle.cache.file" file="target/cachefile"/>
+    <taskdef resource="com/puppycrawl/tools/checkstyle/ant/checkstyle-ant-task.properties" classpath="checkstyle/checkstyle-6.18-all.jar"/>
 
-		</checkstyle><echo>Checkstyle done without error</echo>
+    <checkstyle config="lib/checks.xml"
+                failOnViolation="false"
+                failureProperty="checkstyle.failure">
 
+            <fileset dir="src" includes="**/*.java"/>
+            <formatter type="plain"/>
+            <formatter type="xml" toFile="logs/checkstyle_errors.xml"/> 
+    </checkstyle><echo>Checkstyle done without error</echo>
 </target>
-
 
 <target name="all" depends="build, checkstyle"/>
-
-<target name="run">
-        <java jar="build/jar/Towers.jar" fork="true"/>
-</target>
 
 </project>
