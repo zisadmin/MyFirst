@@ -14,9 +14,8 @@
       <record name="logs/buildlog.txt" action="start"/>
        
                 <javac srcdir="src" destdir="build/classes" includeantruntime="false"/>  
-
-        <mkdir dir="build/jar"/>
-        <jar destfile="build/jar/Project.jar" basedir="build/classes">
+        
+        <jar destfile="build/jar/Sudoku.jar" basedir="build/classes">
             
         </jar>
        <record name="logs/buildlog.txt" action="stop"/>
