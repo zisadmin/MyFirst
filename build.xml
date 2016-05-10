@@ -17,7 +17,12 @@
                 <javac srcdir="src" destdir="build/classes" includeantruntime="false"/>  
         
         <jar destfile="build/jar/Sudoku.jar" basedir="build/classes">
-            
+            <manifest>
+               <attribute name="Main-Class" value="Sudoku"/>
+              
+               <attribute name="Created-By" value="ALi (c)"/>
+            </manifest>
+
         </jar>
       
 </target>
@@ -38,5 +43,8 @@
 </target>
 
 <target name="all" depends="build, checkstyle"/>
+<target name="run">
+        <java jar="build/jar/Sudoku.jar" fork="true"/>
+</target>
 
 </project>
